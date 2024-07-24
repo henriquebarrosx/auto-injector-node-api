@@ -4,8 +4,25 @@
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
+    "baseUrl": ".",
     "strict": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@decorators/*": [
+        "src/infra/decorators/*"
+      ],
+      "@entities/*": [
+        "src/domain/entities/*"
+      ],
+      "@adapters/*": [
+        "src/infra/adapters/*"
+      ],
+      "@HttpServer": [
+        "src/infra/adapters/http-server/types"
+      ],
+    }
   },
   "include": [
     "src/**/*"
