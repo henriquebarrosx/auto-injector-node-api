@@ -1,4 +1,4 @@
 import { httpServer } from "../../adapters/http-server";
-import { RouterConfig } from "./configuration";
+import { Router } from "./router";
 
-export const router = new RouterConfig(httpServer);
+export const router = new Router(httpServer);
