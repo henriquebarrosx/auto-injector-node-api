@@ -7,7 +7,8 @@ import { HttpRequestCallback, RequestType } from './types';
 export class ExpressAdapter implements HttpServerGateway {
   instance: Express;
 
-  private PORT: string = process.env.PORT ?? '3000';
+  private PORT: number = parseInt(process.env.PORT ?? '3000');
+  private HOSTNAME: string = process.env.HOST ?? '127.0.0.1'
 
   constructor() {
     this.instance = express();
@@ -15,7 +16,7 @@ export class ExpressAdapter implements HttpServerGateway {
   }
 
   init(): void {
-    this.instance.listen(this.PORT, () => {
+    this.instance.listen(this.PORT, this.HOSTNAME, () => {
       logger.info(`Server running at port ${this.PORT}`);
     });
   }
