@@ -1,10 +1,13 @@
-import { HttpServerGateway } from "../../adapters/http-server/gateway";
-import { appModule, HttpVerbDecoratorPayload } from "../../config/controller";
+import { appModule } from "@configs/app-module";
+import { HttpServerGateway } from "@adapters/http-server/gateway";
+import { HttpVerbDecoratorPayload } from "@configs/app-module/types";
 
 export class Router {
   constructor(private readonly httpServer: HttpServerGateway) { }
 
-  setup(): void {
+  async setup(): Promise<void> {
+    await appModule.loadContext();
+
     appModule.controllers.forEach((controller: any) => {
       const routes = Reflect.getMetadata('routes', controller) || [];
 

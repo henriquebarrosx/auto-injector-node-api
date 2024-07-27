@@ -19,6 +19,9 @@
       "@adapters/*": [
         "src/infra/adapters/*"
       ],
+      "@configs/*": [
+        "src/infra/config/*"
+      ],
       "@repositories/*": [
         "src/domain/repositories/*"
       ],

@@ -1,5 +1,5 @@
-import { httpServer } from "./infra/adapters/http-server";
-import { router } from "./infra/drivers/router";
+import { httpServer } from "@adapters/http-server";
+import { router } from "@configs/router";
 
 httpServer.init();
 router.setup();
