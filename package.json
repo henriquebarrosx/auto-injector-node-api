@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register ./src/index.ts",
-    "start": "ts-node -r tsconfig-paths/registe ./src/index.ts"
+    "start": "ts-node -r tsconfig-paths/registe ./src/index.ts",
+    "lint": "tsc"
   },
   "dependencies": {
     "date-fns": "^3.6.0",
