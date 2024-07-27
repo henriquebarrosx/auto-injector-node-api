@@ -19,6 +19,9 @@
       "@adapters/*": [
         "src/infra/adapters/*"
       ],
+      "@repositories/*": [
+        "src/domain/repositories/*"
+      ],
       "@HttpServer": [
         "src/infra/adapters/http-server/types"
       ],
