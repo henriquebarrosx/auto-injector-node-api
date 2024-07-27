@@ -1,17 +1,20 @@
+import { logger } from "@adapters/logger";
 import { Cotacao } from "@entities/cotacao";
+import { ResponseEntity } from "@HttpServer";
 import { GetMapping } from "@decorators/GetMapping";
-import { HttpRequest, ResponseEntity } from "@HttpServer";
 import { RestController } from "@decorators/RestController";
+import { CotacoesRepositoryGatewat } from "@repositories/cotacoes-repository";
 
 @RestController()
 export class CotacoesController {
-  @GetMapping('/v1/cotacoes')
-  getAll(): ResponseEntity<Cotacao[]> {
-    return { status: 200, data: [] }
-  }
+  constructor(
+    private readonly cotacaoRepository: CotacoesRepositoryGatewat,
+  ) { }
 
-  @GetMapping('/v1/cotacoes/:id')
-  getById({ params }: HttpRequest) {
-    return { status: 404 }
+  @GetMapping('/v1/cotacoes')
+  async getAll(): Promise<ResponseEntity<Cotacao[]>> {
+    logger.info('CotacoesController.getAll - Getting all quotes');
+    const cotacoes = await this.cotacaoRepository.findAll();
+    return { status: 200, data: cotacoes }
   }
 }

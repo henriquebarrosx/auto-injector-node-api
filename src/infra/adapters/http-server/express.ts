@@ -32,7 +32,6 @@ export class ExpressAdapter implements HttpServerGateway {
 
       catch (exception: any) {
         if (exception.code && exception.message) {
-          logger.error(exception.message);
           response.status(exception.code).send({ message: exception.message });
           return
         }
