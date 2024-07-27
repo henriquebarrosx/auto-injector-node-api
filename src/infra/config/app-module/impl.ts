@@ -37,7 +37,7 @@ export class AppModule {
   }
 
   private async loadServices() {
-    const rootDir = path.join(__dirname, '..', '..');
+    const rootDir = path.join(__dirname, '..', '..', '..');
     const files = await this.getFiles(rootDir);
 
     files.forEach(file => {
@@ -48,13 +48,15 @@ export class AppModule {
 
         if (typeof ServiceClass !== 'function') return;
         if (!ServiceClass.prototype.isService) return;
-        this.services.set(ServiceClass.name.toLowerCase(), new ServiceClass());
+        this.services.set(ServiceClass.name.toLowerCase(), ServiceClass);
       });
     });
+
+    this.autoInjectServicesDependencies();
   }
 
   private async loadControllers() {
-    const rootDir = path.join(__dirname, '..', '..');
+    const rootDir = path.join(__dirname, '..', '..', '..');
     const files = await this.getFiles(rootDir);
 
     files.forEach(file => {
@@ -89,5 +91,14 @@ export class AppModule {
     }
 
     return arrayOfFiles;
+  }
+
+  private autoInjectServicesDependencies() {
+    Array.from(this.services.entries())
+      .forEach(([name, ServiceClass]) => {
+        const dependencies = this.getDependencies(ServiceClass);
+        const value = new ServiceClass(...dependencies);
+        this.services.set(name, value);
+      });
   }
 }
