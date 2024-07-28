@@ -11,6 +11,7 @@ export class LoggerAdapter implements LoggerGateway {
   error(description: string, options: Partial<{ endpoint: string; cause: unknown; }>): void {
     const zonedTime = localDate.format(new Date(), LocalDateFormatEnum.datetime)
     const message = `[${zonedTime}] - ${description}`
-    console.error(message, options);
+    if (options) console.error(message, options);
+    else console.error(message);
   }
 }

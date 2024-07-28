@@ -28,6 +28,9 @@
       "@utils/*": [
         "src/infra/utils/*"
       ],
+      "@exceptions/*": [
+        "src/domain/exceptions/*"
+      ],
       "@repositories/*": [
         "src/domain/repositories/*"
       ],

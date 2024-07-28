@@ -24,8 +24,7 @@ export class ExpressAdapter implements HttpServerGateway {
   on(requestType: RequestType, endpoint: string, callback: HttpRequestCallback): void {
     this.instance[requestType](endpoint, async (request: Request, response: Response) => {
       try {
-        const { headers, body, params } = request;
-        const output = await callback({ headers, body, params });
+        const output = await callback(request);
         response.status(output.status).send(output.data);
         return;
       }

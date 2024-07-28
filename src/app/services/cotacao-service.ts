@@ -10,8 +10,8 @@ export class CotacaoService {
     private readonly contaService: ContaService
   ) { }
 
-  async getAll(): Promise<Cotacao[]> {
-    const conta = await this.contaService.findById(1);
+  async getByAccountId(accountId: number): Promise<Cotacao[]> {
+    const conta = await this.contaService.findById(accountId);
     const cotacoes = await this.cotacaoRepository.findByAccountId(conta.getId());
     return cotacoes;
   }
