@@ -5,9 +5,10 @@ import { ContaRepositoryGateway } from "@repositories/conta-repository";
 @Service()
 export class ContaRepository implements ContaRepositoryGateway {
   async findById(id: number): Promise<Conta> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(new Conta(id));
+        // resolve(new Conta(id));
+        reject(new Error('Account not found'))
       }, 200);
     });
   }

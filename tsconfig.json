@@ -25,6 +25,9 @@
       "@configs/*": [
         "src/infra/config/*"
       ],
+      "@utils/*": [
+        "src/infra/utils/*"
+      ],
       "@repositories/*": [
         "src/domain/repositories/*"
       ],
