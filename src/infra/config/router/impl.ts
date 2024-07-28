@@ -6,8 +6,6 @@ export class Router {
   constructor(private readonly httpServer: HttpServerGateway) { }
 
   async setup(): Promise<void> {
-    await appModule.loadContext();
-
     appModule.controllers.forEach((controller: any) => {
       const routes = Reflect.getMetadata('routes', controller) || [];
 
