@@ -8,7 +8,7 @@ export class CotacaoRepository implements CotacoesRepositoryGatewat {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve([]);
-      }, 1_000);
+      }, 200);
     })
   }
 }

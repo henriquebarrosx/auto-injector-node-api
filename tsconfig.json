@@ -16,6 +16,9 @@
       "@entities/*": [
         "src/domain/entities/*"
       ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
       "@adapters/*": [
         "src/infra/adapters/*"
       ],

@@ -8,7 +8,7 @@ export class ContaRepository implements ContaRepositoryGatewat {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve([]);
-      }, 1_000);
+      }, 200);
     })
   }
 }
