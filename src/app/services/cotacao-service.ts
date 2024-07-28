@@ -3,7 +3,7 @@ import { Service } from "@decorators/Service";
 import { CotacoesRepositoryGatewat } from "@repositories/cotacoes-repository";
 
 @Service()
-export class CotacoesService {
+export class CotacaoService {
   constructor(
     private readonly cotacaoRepository: CotacoesRepositoryGatewat,
   ) { }

@@ -27,7 +27,7 @@ export class AppModule {
     logger.info('App module context loaded.');
   }
 
-  private getDependencies(module: Object, instantiateDeps: boolean = true) {
+  private getDependencies(module: Object) {
     const constructorString = module.toString();
     const result = constructorString.match(/constructor\s*[^\(]*\(\s*([^\)]*)\)/);
 
@@ -36,7 +36,13 @@ export class AppModule {
 
       return dependenciesName.reduce((acc: Object[], dep: string) => {
         const Dependency = this.services.get(dep);
-        if (Dependency) acc.push(instantiateDeps ? new Dependency() : Dependency);
+
+        if (Dependency) {
+          const hasConstructor = typeof Dependency === 'function';
+          const content = hasConstructor ? new Dependency() : Dependency;
+          acc.push(content);
+        }
+
         return acc;
       }, []);;
     }
@@ -73,8 +79,7 @@ export class AppModule {
         if (typeof ControllerClass !== 'function') return;
         if (!ControllerClass.prototype.isRestController) return;
 
-        const dependencies = this.getDependencies(ControllerClass, false);
-
+        const dependencies = this.getDependencies(ControllerClass);
         const key = ControllerClass.name.toLowerCase();
         const value = new ControllerClass(...dependencies);
         this.instances.set(key, value);
