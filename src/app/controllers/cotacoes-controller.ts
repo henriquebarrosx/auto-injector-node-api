@@ -2,7 +2,6 @@ import { logger } from "@adapters/logger";
 import { Cotacao } from "@entities/cotacao";
 import { ResponseEntity } from "@HttpServer";
 import { GetMapping } from "@decorators/GetMapping";
-import { ContaService } from "@services/conta-service";
 import { CotacaoService } from "@services/cotacao-service";
 import { RestController } from "@decorators/RestController";
 
