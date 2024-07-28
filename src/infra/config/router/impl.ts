@@ -10,7 +10,7 @@ export class Router {
       const routes = Reflect.getMetadata('routes', controller) || [];
 
       routes.forEach(({ method, endpoint, callback }: HttpVerbDecoratorPayload) => {
-        this.httpServer.on(method, endpoint, () => controller[callback]());
+        this.httpServer.on(method, endpoint, (...args) => controller[callback](...args));
       });
     });
   }

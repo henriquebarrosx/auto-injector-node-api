@@ -1,7 +1,8 @@
 import { logger } from "@adapters/logger";
 import { Cotacao } from "@entities/cotacao";
-import { ResponseEntity } from "@HttpServer";
+import { Exception } from "@exceptions/type";
 import { GetMapping } from "@decorators/GetMapping";
+import { HttpRequest, ResponseEntity } from "@HttpServer";
 import { CotacaoService } from "@services/cotacao-service";
 import { RestController } from "@decorators/RestController";
 
@@ -12,9 +13,16 @@ export class CotacoesController {
   ) { }
 
   @GetMapping('/v1/cotacoes')
-  async getAll(): Promise<ResponseEntity<Cotacao[]>> {
-    logger.info('CotacoesController.getAll - Getting all quotes');
-    const cotacoes = await this.cotacaoService.getAll();
+  async getByAccount({ headers }: HttpRequest): Promise<ResponseEntity<Cotacao[] | Exception>> {
+    const accountId = headers.account;
+
+    if (!accountId) {
+      logger.error('CotacoesController.getByAccount - Missing accountId from headers');
+      return { status: 400, data: { message: 'Missing accountId from headers' } }
+    }
+
+    logger.info(`CotacoesController.getByAccount - Getting all quotes by account ${accountId}`);
+    const cotacoes = await this.cotacaoService.getByAccountId(accountId);
     return { status: 200, data: cotacoes }
   }
 }
