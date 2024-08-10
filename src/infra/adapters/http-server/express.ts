@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 
 import { logger } from '../logger';
-import { HttpServerGateway } from "./gateway";
+import { HttpServerGateway, HttpStatus } from "./gateway";
 import { HttpRequestCallback, RequestType } from './types';
 
 export class ExpressAdapter implements HttpServerGateway {
@@ -36,8 +36,9 @@ export class ExpressAdapter implements HttpServerGateway {
         }
 
         logger.error(exception.message);
-        response.status(500).send({ message: "Internal Server Error" });
-        return;
+
+        response.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .send({ message: "Internal Server Error" });
       }
     })
   }

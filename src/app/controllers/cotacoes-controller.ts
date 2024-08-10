@@ -4,6 +4,7 @@ import { Exception } from "@exceptions/type";
 import { GetMapping } from "@decorators/GetMapping";
 import { HttpRequest, ResponseEntity } from "@HttpServer";
 import { CotacaoService } from "@services/cotacao-service";
+import { HttpStatus } from "@adapters/http-server/gateway";
 import { RestController } from "@decorators/RestController";
 
 @RestController()
@@ -18,11 +19,11 @@ export class CotacoesController {
 
     if (!accountId) {
       logger.error('CotacoesController.getByAccount - Missing accountId from headers');
-      return { status: 400, data: { message: 'Missing accountId from headers' } }
+      return { status: HttpStatus.BAD_REQUEST, data: { message: 'Missing accountId from headers' } }
     }
 
     logger.info(`CotacoesController.getByAccount - Getting all quotes by account ${accountId}`);
     const cotacoes = await this.cotacaoService.getByAccountId(accountId);
-    return { status: 200, data: cotacoes }
+    return { status: HttpStatus.OK, data: cotacoes }
   }
 }
